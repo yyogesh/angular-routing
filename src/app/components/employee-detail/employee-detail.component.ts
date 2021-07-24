@@ -22,7 +22,5 @@ export class EmployeeDetailComponent implements OnInit {
     } else {
       this.router.navigate(['/employee'])
     }
-
   }
-
 }

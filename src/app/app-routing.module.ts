@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
-import { EmployeeComponent } from './components/employee/employee.component';
-import { HomeComponent } from './components/home/home.component';
+// import { Home1Component } from './components/home/home1/home1.component';
+// import { Home2Component } from './components/home/home2/home2.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'employee', component: EmployeeComponent },
-  { path: 'employee/:id', component: EmployeeDetailComponent }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home', loadChildren: () => import(`./components/home/home.module`).then(m => m.HomeModule),
+    // children: [
+    //   {
+    //     path: 'home1', component: Home1Component,
+    //   },
+    //   {
+    //     path: 'home2', component: Home2Component,
+    //   }
+    // ]
+  },
+
 ];
 
 @NgModule({

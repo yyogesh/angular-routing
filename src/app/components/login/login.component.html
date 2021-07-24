@@ -1,0 +1,19 @@
+<div class="LOGIN">
+  <p class="LOGIN__USERNAME">
+    <mat-form-field appearance="legacy">
+      <mat-label>UserName</mat-label>
+      <input matInput placeholder="UserName" name="username" [(ngModel)]="userName">
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="password">
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+  </p>
+  <p class="LOGIN__BUTTON">
+    <button mat-raised-button (click)="handleLoginClick()" color="primary">Login</button>
+  </p>
+</div>
