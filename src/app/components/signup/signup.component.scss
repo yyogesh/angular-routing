@@ -1,0 +1,18 @@
+.LOGIN {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+
+  flex-direction: column;
+
+  &__USERNAME {
+   margin: 5 0;
+  }
+
+  &__BUTTON {
+    margin: 10;
+    display:flex;
+    justify-content: flex-end;
+  }
+}

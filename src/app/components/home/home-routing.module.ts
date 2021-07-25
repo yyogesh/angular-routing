@@ -5,11 +5,15 @@ import { EmployeeComponent } from '../employee/employee.component';
 import { HomeComponent } from './home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', loadChildren: () => import(`../about/about.module`).then(m => m.AboutModule) },
-  { path: 'contact', loadChildren: () => import(`../contact/contact.module`).then(m => m.ContactModule) },
-  { path: 'employee', component: EmployeeComponent },
-  { path: 'employee/:id', component: EmployeeDetailComponent }
+  {
+    path: '', component: HomeComponent, children: [
+      { path: 'about', loadChildren: () => import(`../about/about.module`).then(m => m.AboutModule) },
+      { path: 'contact', loadChildren: () => import(`../contact/contact.module`).then(m => m.ContactModule) },
+      { path: 'employee', component: EmployeeComponent },
+      { path: 'employee/:id', component: EmployeeDetailComponent }
+    ]
+  },
+
 ];
 
 @NgModule({
