@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,19 +11,31 @@ import { UserService } from 'src/app/services/user.service';
 export class SignupComponent implements OnInit {
   userName = '';
   password = '';
-  constructor(private router: Router, private userService: UserService) { }
-
-  ngOnInit(): void {
+  signUpForm: FormGroup;
+  constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) {
+    this.signUpForm = this.formBuilder.group({
+      userName: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
+    })
   }
 
-  handleLoginClick(loginForm: any) {
-    console.log(loginForm)
-    if (loginForm.valid) {
-      if (this.userName === 'abc' && this.password === '123') {
-        this.userService.setIsUserLogin(true);
-        this.router.navigate(['/home'])
+  ngOnInit(): void {
+    this.signUpForm.get('confirmPassword')?.valueChanges.subscribe(val => {
+      if (val !== this.signUpForm.get('password')?.value) {
+        this.signUpForm.get('confirmPassword')?.setErrors({ 'passwordMistMatch': true })
       }
-    }
+    })
+  }
+
+  handleLoginClick() {
+    console.log(this.signUpForm)
+    // if (this.signUpForm.valid) {
+    //   if (this.userName === 'abc' && this.password === '123') {
+    //     this.userService.setIsUserLogin(true);
+    //     this.router.navigate(['/home'])
+    //   }
+    // }
   }
 
 }

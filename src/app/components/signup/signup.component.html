@@ -1,32 +1,53 @@
 <div class="LOGIN">
-  <form #loginForm="ngForm" (ngSubmit)="handleLoginClick(loginForm)">
+  <form [formGroup]="signUpForm" (ngSubmit)="handleLoginClick()">
     <p class="LOGIN__USERNAME">
       <mat-form-field appearance="legacy">
         <mat-label>UserName</mat-label>
-        <input matInput placeholder="UserName" required name="userName" minlength="3" [(ngModel)]="userName"
-          #inputUsername="ngModel">
+        <input matInput placeholder="UserName" formControlName="userName">
+
         <mat-hint>Hint</mat-hint>
-        <mat-error *ngIf="inputUsername.touched && inputUsername.errors?.required">Please enter a valid username
+        <mat-error *ngIf="signUpForm.get('userName')?.touched && signUpForm.get('userName')?.errors?.required">Please
+          enter a valid username
         </mat-error>
-        <mat-error *ngIf="inputUsername.touched && inputUsername.errors?.minlength">Please enter more than 3 char
+        <mat-error *ngIf="signUpForm.get('userName')?.touched && signUpForm.get('userName')?.errors?.minlength">Please
+          enter more than 3 char
         </mat-error>
       </mat-form-field>
     </p>
     <p>
       <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
-        <input type="password" matInput placeholder="Password" name="password" ngModel>
+        <input type="password" matInput placeholder="Password" formControlName="password">
         <mat-hint>Hint</mat-hint>
+
+        <mat-error *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.required">Please
+          enter a valid password
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword">
+        <mat-hint>Hint</mat-hint>
+        <mat-error
+          *ngIf="signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.errors?.required">
+          Please enter a valid password
+        </mat-error>
+        <mat-error
+          *ngIf="signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.errors?.passwordMistMatch">
+          Password and confirmPassword should be same
+        </mat-error>
       </mat-form-field>
     </p>
     <p class="LOGIN__BUTTON">
-      <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">Submit</button>
+      <button type="submit" [disabled]="!signUpForm.valid" mat-raised-button color="primary">Submit</button>
       <button type="button" mat-raised-button color="accent" routerLink="/login">Login</button>
     </p>
-    <p>dirty : {{loginForm.dirty}}</p>
-    <p>pristine : {{loginForm.pristine}}</p>
-    <p>valid : {{loginForm.valid}}</p>
-    <p>touched : {{loginForm.touched}}</p>
-    <p>errors : {{loginForm.errors}}</p>
+    <p>dirty : {{signUpForm.dirty}}</p>
+    <p>pristine : {{signUpForm.pristine}}</p>
+    <p>valid : {{signUpForm.valid}}</p>
+    <p>touched : {{signUpForm.touched}}</p>
+    <p>errors : {{signUpForm.errors}}</p>
   </form>
 </div>

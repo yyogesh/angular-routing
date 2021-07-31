@@ -13,8 +13,11 @@ import { EmployeeDetailComponent } from './components/employee-detail/employee-d
 import { Home1Component } from './components/home/home1/home1.component';
 import { Home2Component } from './components/home/home2/home2.component';
 import { LoginComponent } from './components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './components/signup/signup.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -34,9 +37,13 @@ import { SignupComponent } from './components/signup/signup.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

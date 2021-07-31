@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class UserService {
   isUserLogin = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getIsUserLogin(): boolean {
     return this.isUserLogin
@@ -14,6 +15,10 @@ export class UserService {
 
   setIsUserLogin(value: boolean) {
     this.isUserLogin = value;
+  }
+
+  public getUserData() {
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
   }
 
 }
